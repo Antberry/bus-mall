@@ -3,12 +3,14 @@
 var allProducts = [];
 var productpics = document.getElementsByClassName('productpics');
 var currentProds = [];
-
+var mouseClicks = 0;
+var maxClicks = 25;
 
 function ProductPic(name) {
   this.filepath = `../img/${name}.jpg`;
   this.name = name;
   this.views = 0;
+  this.votes = 0;
   allProducts.push(this);
 }
 
@@ -42,8 +44,6 @@ function showRandomProd(){
     random1 = Math.floor(Math.random() * allProducts.length);
     random2 = Math.floor(Math.random() * allProducts.length);
     random3 = Math.floor(Math.random() * allProducts.length);
-
-
   }
 
   allProducts[random1].views += 1;
@@ -59,12 +59,25 @@ function showRandomProd(){
   productpics[2].alt = allProducts[random3].name;
   productpics[2].title = allProducts[random3].name;
   currentProds = [random1,random2,random3];
-  // productpics = currentProds;
 }
 
+
+
 function handleProdClick(event){
-  console.log(event.target);
+  for (var i = 0; i < allProducts.length; i++){
+    if(event.target.alt === allProducts[i].name){
+      allProducts[i].votes++;
+      console.log(allProducts[i].votes);
+    }
+  }
   showRandomProd();
+  mouseClicks++;
+  if(mouseClicks === maxClicks){
+    productpics[0].removeEventListener('click', handleProdClick);
+    productpics[1].removeEventListener('click', handleProdClick);
+    productpics[2].removeEventListener('click', handleProdClick);
+  }
+  console.log(event.target);
 }
 
 showRandomProd();
