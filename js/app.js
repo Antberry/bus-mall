@@ -2,6 +2,7 @@
 
 var allProducts = [];
 var productpics = document.getElementsByClassName('productpics');
+var currentProds = [];
 
 
 function ProductPic(name) {
@@ -37,12 +38,14 @@ function showRandomProd(){
   var random2 = Math.floor(Math.random() * allProducts.length);
   var random3 = Math.floor(Math.random() * allProducts.length);
 
-  while (productpics[0].alt === allProducts[random1].name && productpics[1].alt === allProducts[random2].name && productpics[2].alt === allProducts[random3].name){
+  while (random1 === random2 || random1 === random3 || random2 === random3 || currentProds.includes(random1) || currentProds.includes(random2) || currentProds.includes(random3)){
     random1 = Math.floor(Math.random() * allProducts.length);
     random2 = Math.floor(Math.random() * allProducts.length);
     random3 = Math.floor(Math.random() * allProducts.length);
 
+
   }
+
   allProducts[random1].views += 1;
   allProducts[random2].views += 1;
   allProducts[random3].views += 1;
@@ -55,6 +58,8 @@ function showRandomProd(){
   productpics[2].src = allProducts[random3].filepath;
   productpics[2].alt = allProducts[random3].name;
   productpics[2].title = allProducts[random3].name;
+  currentProds = [random1,random2,random3];
+  // productpics = currentProds;
 }
 
 function handleProdClick(event){
