@@ -60,9 +60,7 @@ function showRandomProd(){
   productpics[2].title = allProducts[random3].name;
   currentProds = [random1,random2,random3];
 }
-
-
-
+var chartData = [];
 function handleProdClick(event){
   for (var i = 0; i < allProducts.length; i++){
     if(event.target.alt === allProducts[i].name){
@@ -76,11 +74,60 @@ function handleProdClick(event){
     productpics[0].removeEventListener('click', handleProdClick);
     productpics[1].removeEventListener('click', handleProdClick);
     productpics[2].removeEventListener('click', handleProdClick);
+
+    for (var j = 0; j < allProducts.length; j++) {
+      console.log('votes function called');
+      chartData[j] = allProducts[j].votes;
+    }
+    productChart();
   }
+
   console.log(event.target);
+}
+var chartNames = [];
+function chartNamesFunction() {
+  for (var i = 0 ; i < allProducts.length ; i++){
+    chartNames[i] = allProducts[i].name;
+  }
+}
+
+chartNamesFunction();
+
+function productChart(){
+
+  var ctx = document.getElementById('prodchart').getContext('2d');
+  var prodChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: chartNames,
+      datasets: [{
+        label: '# of Clicks',
+        data: chartData,
+        backgroundColor: 'rgb(255,0,0,1)',
+        borderColor: 'rgb(0,0,0,1)',
+        borderWidth: 1,
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            fontColor: 'rgb(255,0,0,1)',
+            beginAtZero: true
+          }
+        }],
+        xAxes: [{
+          ticks: {
+            fontColor: 'rgb(255,0,0,1)'
+          }
+        }]
+      }
+    }
+  });
 }
 
 showRandomProd();
+// productChart();
 
 productpics[0].addEventListener('click', handleProdClick);
 productpics[1].addEventListener('click', handleProdClick);
