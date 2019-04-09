@@ -3,7 +3,8 @@
 var allProducts = [];
 var productpics = document.getElementsByClassName('productpics');
 var currentProds = [];
-
+var mouseClicks = 0;
+var maxClicks = 25;
 
 function ProductPic(name) {
   this.filepath = `../img/${name}.jpg`;
@@ -60,6 +61,8 @@ function showRandomProd(){
   currentProds = [random1,random2,random3];
 }
 
+
+
 function handleProdClick(event){
   for (var i = 0; i < allProducts.length; i++){
     if(event.target.alt === allProducts[i].name){
@@ -67,8 +70,14 @@ function handleProdClick(event){
       console.log(allProducts[i].votes);
     }
   }
-  console.log(event.target);
   showRandomProd();
+  mouseClicks++;
+  if(mouseClicks === maxClicks){
+    productpics[0].removeEventListener('click', handleProdClick);
+    productpics[1].removeEventListener('click', handleProdClick);
+    productpics[2].removeEventListener('click', handleProdClick);
+  }
+  console.log(event.target);
 }
 
 showRandomProd();
