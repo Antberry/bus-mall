@@ -60,6 +60,7 @@ function showRandomProd(){
   productpics[2].title = allProducts[random3].name;
   currentProds = [random1,random2,random3];
 }
+
 var chartData = [];
 function handleProdClick(event){
   for (var i = 0; i < allProducts.length; i++){
@@ -74,16 +75,18 @@ function handleProdClick(event){
     productpics[0].removeEventListener('click', handleProdClick);
     productpics[1].removeEventListener('click', handleProdClick);
     productpics[2].removeEventListener('click', handleProdClick);
+    localStorage.setItem('busmall', JSON.stringify(allProducts));
 
     for (var j = 0; j < allProducts.length; j++) {
       console.log('votes function called');
       chartData[j] = allProducts[j].votes;
-    }
+    } 
     productChart();
-  }
-
+  } 
   console.log(event.target);
+  
 }
+
 var chartNames = [];
 function chartNamesFunction() {
   for (var i = 0 ; i < allProducts.length ; i++){
@@ -91,10 +94,40 @@ function chartNamesFunction() {
   }
 }
 
+function continueVotes(){
+  var productVotesFromBefore = localStorage.busmall;
+  var parseProductVoteFromStorage = JSON.parse(productVotesFromBefore);
+  if(parseProductVoteFromStorage.length){
+    allProducts = parseProductVoteFromStorage;
+  }
+  else {
+    new ProductPic('bag');
+    new ProductPic('banana');
+    new ProductPic('bathroom');
+    new ProductPic('boots');
+    new ProductPic('breakfast');
+    new ProductPic('bubblegum');
+    new ProductPic('chair');
+    new ProductPic('cthulhu');
+    new ProductPic('dog-duck');
+    new ProductPic('dragon');
+    new ProductPic('pen');
+    new ProductPic('pet-sweep');
+    new ProductPic('scissors');
+    new ProductPic('shark');
+    new ProductPic('sweep');
+    new ProductPic('tauntaun');
+    new ProductPic('unicorn');
+    new ProductPic('usb');
+    new ProductPic('water-can');
+    new ProductPic('wine-glass');
+  }
+}
+
+continueVotes();
 chartNamesFunction();
 
 function productChart(){
-
   var ctx = document.getElementById('prodchart').getContext('2d');
   var prodChart = new Chart(ctx, {
     type: 'bar',
