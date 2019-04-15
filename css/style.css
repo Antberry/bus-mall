@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Bungee+Inline');
 body{
   width: 960px;
   margin: 0 auto;
@@ -6,15 +7,18 @@ body{
 }
 
 h1{
-  font-size: 40px;
+  font-size: 50px;
   margin-top: 50px;
   text-align: center;
+  font-family: 'Bungee Inline', cursive;
+  color: red;
 }
 
 p{
   font-size: 20px;
   text-align: center;
   margin-top: 30px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 img{
@@ -23,4 +27,7 @@ img{
   text-align: center;
   margin-top: 30px;
   margin-bottom: 50px;
+  border: ridge;
+  border-color: red;
+  border-width: 5px;
 }

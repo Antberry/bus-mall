@@ -101,6 +101,7 @@ function continueVotes(){
     allProducts = parseProductVoteFromStorage;
   }
   else {
+
     new ProductPic('bag');
     new ProductPic('banana');
     new ProductPic('bathroom');
@@ -159,8 +160,11 @@ function productChart(){
   });
 }
 
+// chartNamesFunction();
 showRandomProd();
-// productChart();
+
+// continueVotes();
+
 
 productpics[0].addEventListener('click', handleProdClick);
 productpics[1].addEventListener('click', handleProdClick);
