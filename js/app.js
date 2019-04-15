@@ -14,27 +14,6 @@ function ProductPic(name) {
   allProducts.push(this);
 }
 
-new ProductPic('bag');
-new ProductPic('banana');
-new ProductPic('bathroom');
-new ProductPic('boots');
-new ProductPic('breakfast');
-new ProductPic('bubblegum');
-new ProductPic('chair');
-new ProductPic('cthulhu');
-new ProductPic('dog-duck');
-new ProductPic('dragon');
-new ProductPic('pen');
-new ProductPic('pet-sweep');
-new ProductPic('scissors');
-new ProductPic('shark');
-new ProductPic('sweep');
-new ProductPic('tauntaun');
-new ProductPic('unicorn');
-new ProductPic('usb');
-new ProductPic('water-can');
-new ProductPic('wine-glass');
-
 function showRandomProd(){
   var random1 = Math.floor(Math.random() * allProducts.length);
   var random2 = Math.floor(Math.random() * allProducts.length);
@@ -95,13 +74,7 @@ function chartNamesFunction() {
 }
 
 function continueVotes(){
-  var productVotesFromBefore = localStorage.busmall;
-  var parseProductVoteFromStorage = JSON.parse(productVotesFromBefore);
-  if(parseProductVoteFromStorage.length){
-    allProducts = parseProductVoteFromStorage;
-  }
-  else {
-
+  if(!localStorage.getItem('busmall')){
     new ProductPic('bag');
     new ProductPic('banana');
     new ProductPic('bathroom');
@@ -122,6 +95,11 @@ function continueVotes(){
     new ProductPic('usb');
     new ProductPic('water-can');
     new ProductPic('wine-glass');
+  }
+  else {
+    var productVotesFromBefore = localStorage.busmall;
+    var parseProductVoteFromStorage = JSON.parse(productVotesFromBefore);
+    allProducts = parseProductVoteFromStorage;
   }
 }
 
